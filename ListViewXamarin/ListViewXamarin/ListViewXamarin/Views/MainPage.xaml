@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ListViewXamarin"
+             xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             x:Class="ListViewXamarin.MainPage">
+    <ContentPage.BindingContext>
+        <local:ContactsViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Behaviors>
+        <local:Behavior/>
+    </ContentPage.Behaviors>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:GroupHeaderConverter x:Key="GroupHeaderConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+	 <ContentPage.Content>
+        <StackLayout>
+            <syncfusion:SfListView x:Name="listView" ItemSize="60" ItemsSource="{Binding ContactsInfo}">
+                <syncfusion:SfListView.ItemTemplate >
+                    <DataTemplate>
+                        <Grid x:Name="grid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Source="{Binding ContactImage}" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="50" WidthRequest="50"/>
+                            <Grid Grid.Column="1" RowSpacing="1" Padding="10,0,0,0" VerticalOptions="Center">
+                                <Label LineBreakMode="NoWrap" TextColor="#474747" Text="{Binding ContactName}"/>
+                                <Label Grid.Row="1" Grid.Column="0" TextColor="#474747" LineBreakMode="NoWrap" Text="{Binding ContactNumber}"/>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </syncfusion:SfListView.ItemTemplate>
+                <syncfusion:SfListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <Grid BackgroundColor="Teal">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Text="{Binding ., Converter={StaticResource GroupHeaderConverter}}" FontSize="22" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" Margin="10,0,0,0" />
+                            <Grid Grid.Column="1" HorizontalOptions="End" VerticalOptions="End">
+                                <Image x:Name="button" Source="Add.png" HeightRequest="50" WidthRequest="40" >
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.ButtonTappedCommand, Source={x:Reference listView}}" CommandParameter="{Binding .}"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </syncfusion:SfListView.GroupHeaderTemplate>
+            </syncfusion:SfListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
