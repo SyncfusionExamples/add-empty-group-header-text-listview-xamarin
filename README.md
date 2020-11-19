@@ -1,2 +1,1 @@
-# add-empty-group-header-text-listview-xamarin
-How to add empty group header text in Xamarin.Forms ListView (SfListView )
+**[View document in Syncfusion Xamarin Knowledge base](https://www.syncfusion.com/kb/12095/how-to-update-empty-group-header-text-in-xamarin-forms-listview-sflistview)**
